@@ -106,6 +106,11 @@ if __name__ == "__main__":
     # good for more testing data
     save_path = None
 
+    # calc example
+    # Mouse Position: x=1019, y=1144 top left corner
+    # Mouse Position: x=1524, y=1037 bottom right corner
+    # width = 1524 - 1019 = 505, height =  1144 - 1100 = 44
+
     # define the cropping area, use mousecursor.py to find the upper left corner and the lower right corner
     # x, y, width, height = 1022, 1145, 519, 29 # 2k(2560, 1440)
     # full hd (1920, 1080)
