@@ -101,9 +101,9 @@ if __name__ == "__main__":
     # Set the interval (in seconds) between taking screenshots
     interval = 0.01
 
-    # save_path="bot_screenshots"
     # Screenshots will be disabled when None
     # good for more testing data
+    # save_path="bot_screenshots"
     save_path = None
 
     # use these to finetune the cropping area
