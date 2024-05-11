@@ -68,11 +68,24 @@ class ScreenshotHelper:
 
 
 if __name__ == "__main__":
-    # Define the capture area (x, y, width, height)
-    # capture_area = (1022, 1145, 519, 29)
-    # Mouse Position: x=1524, y=1037 , 392, 23
-    # Mouse Position: x=1916, y=1060
-    capture_area = (1524, 1037, 392, 23)
+
+    # use these to finetune the cropping area
+    offset_height = 0
+    offset_width = 0
+
+    # use mousecursor.py to get these values
+    left_corner_position_of_cropping_area = {"x": 1019, "y": 1144}
+    right_corner_position_of_cropping_area = {"x": 1524, "y": 1100}
+
+    # define the cropping area
+    x = left_corner_position_of_cropping_area["x"]
+    y = left_corner_position_of_cropping_area["y"]
+    width = right_corner_position_of_cropping_area["x"] - \
+        left_corner_position_of_cropping_area["x"] + offset_width
+    height = left_corner_position_of_cropping_area["y"] - \
+        right_corner_position_of_cropping_area["y"] + offset_height
+
+    capture_area = (x, y, width, height)
 
     screenshot_helper = ScreenshotHelper(
         capture_area, savepath="screenshot_not_labeled/")

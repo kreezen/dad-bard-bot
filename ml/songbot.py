@@ -106,15 +106,24 @@ if __name__ == "__main__":
     # good for more testing data
     save_path = None
 
-    # calc example
-    # Mouse Position: x=1019, y=1144 top left corner
-    # Mouse Position: x=1524, y=1037 bottom right corner
-    # width = 1524 - 1019 = 505, height =  1144 - 1100 = 44
+    # use these to finetune the cropping area
+    offset_height = 0
+    offset_width = 0
 
-    # define the cropping area, use mousecursor.py to find the upper left corner and the lower right corner
-    # x, y, width, height = 1022, 1145, 519, 29 # 2k(2560, 1440)
-    # full hd (1920, 1080)
-    x, y, width, height = 764, 858, 392, 22
+    # get the position of the upper left corner and the lower right corner of the music box
+    # take an ingame screenshot and Fullscreen it
+    # use mousecursor.py to find the upper left corner and the lower right corner of the music box
+    # replace the values with your position
+    left_corner_position_of_musicbox = {"x": 1019, "y": 1144}
+    right_corner_position_of_musicbox = {"x": 1524, "y": 1100}
+
+    # define the cropping area
+    x = left_corner_position_of_musicbox["x"]
+    y = left_corner_position_of_musicbox["y"]
+    width = right_corner_position_of_musicbox["x"] - \
+        left_corner_position_of_musicbox["x"] + offset_width
+    height = left_corner_position_of_musicbox["y"] - \
+        right_corner_position_of_musicbox["y"] + offset_height
 
     # Calculate the left, top, right, and bottom coordinates for ImageGrab.grab
     left = x
