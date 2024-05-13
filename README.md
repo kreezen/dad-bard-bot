@@ -5,10 +5,10 @@
 `songbot.py` and disable `save_path`
 
 ## Start the Game
-- Crop the area as close as possible to the training data to have the best success rate.
 - Start `songbot.py` and have fun. The Bot has a 97% success rate of playing music.
 
 ## Known Issuses
+- Crop the area as close as possible to the training data to have the best success rate.
 - Dissable Imagesharping in your Graphic drivers to have a high succes rate.
 
 ## TODO
