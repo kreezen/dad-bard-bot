@@ -56,7 +56,7 @@ class ScreenCaptureNN:
     def start_loop(self, threshold=0.8):
         print("Starting loop...")
         while True:
-            self.evaluate_screen(threshold)
+            self.evaluate_screen(threshold=threshold)
             time.sleep(self.interval)
 
     def evaluate_screen(self, threshold=0.8):
@@ -96,34 +96,35 @@ class ScreenCaptureNN:
 if __name__ == "__main__":
 
     # Update with your PyTorch model path
-    model_path = "./trained_models/bard.pth"
+    model_path = "./trained_models/bard_97_8.pth"
 
     # Set the interval (in seconds) between taking screenshots
     interval = 0.01
 
     # Screenshots will be disabled when None
     # good for more testing data
-    # save_path="bot_screenshots"
+    # save_path = "bot_screenshots"
     save_path = None
 
     # use these to finetune the cropping area
-    offset_height = 0
+    offset_height = 5
     offset_width = 0
 
-    # get the position of the upper left corner and the lower right corner of the music box
     # take an ingame screenshot and Fullscreen it
-    # use mousecursor.py to find the upper left corner and the lower right corner of the music box
+    # get the position of the upper left corner and the lower right corner of the musicbox
+    # use mousecursor.py to find the upper left corner and the lower right corner of the musicbox
     # replace the values with your position
-    left_corner_position_of_musicbox = {"x": 1019, "y": 1144}
-    right_corner_position_of_musicbox = {"x": 1524, "y": 1100}
+    # this position works for 2k ingame resolution
+    left_corner_position_of_musicbox = {"x": 1014, "y": 1143}
+    right_corner_position_of_musicbox = {"x": 1542, "y": 1172}
 
     # define the cropping area
     x = left_corner_position_of_musicbox["x"]
     y = left_corner_position_of_musicbox["y"]
     width = right_corner_position_of_musicbox["x"] - \
         left_corner_position_of_musicbox["x"] + offset_width
-    height = left_corner_position_of_musicbox["y"] - \
-        right_corner_position_of_musicbox["y"] + offset_height
+    height = right_corner_position_of_musicbox["y"] - \
+        left_corner_position_of_musicbox["y"] + offset_height
 
     # Calculate the left, top, right, and bottom coordinates for ImageGrab.grab
     left = x

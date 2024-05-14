@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum, auto
-from time import time
+import time
 import cv2
 import numpy as np
 import pyautogui
@@ -36,7 +36,6 @@ class ScreenshotHelper:
                     self.capture_screenshot()
             except Exception as e:
                 logging.error(f"Error: {str(e)}")
-                continue
 
     def stop(self):
         self.current_state = State.STOPPED
@@ -70,25 +69,29 @@ class ScreenshotHelper:
 if __name__ == "__main__":
 
     # use these to finetune the cropping area
-    offset_height = 0
+    offset_height = 5
     offset_width = 0
 
+    # keybindings for screenshot bot
+    screenshotkey = "j"
+    shutdownkey = "k"
+
     # use mousecursor.py to get these values
-    left_corner_position_of_cropping_area = {"x": 1019, "y": 1144}
-    right_corner_position_of_cropping_area = {"x": 1524, "y": 1100}
+    left_corner_position_of_cropping_area = {"x": 1014, "y": 1143}
+    right_corner_position_of_cropping_area = {"x": 1542, "y": 1172}
 
     # define the cropping area
     x = left_corner_position_of_cropping_area["x"]
     y = left_corner_position_of_cropping_area["y"]
     width = right_corner_position_of_cropping_area["x"] - \
         left_corner_position_of_cropping_area["x"] + offset_width
-    height = left_corner_position_of_cropping_area["y"] - \
-        right_corner_position_of_cropping_area["y"] + offset_height
+    height = right_corner_position_of_cropping_area["y"] - \
+        left_corner_position_of_cropping_area["y"] + offset_height
 
     capture_area = (x, y, width, height)
 
     screenshot_helper = ScreenshotHelper(
-        capture_area, savepath="screenshot_not_labeled/")
+        capture_area, savepath="./screenshot_not_labeled/", screenshotkey=screenshotkey, shutdownkey=shutdownkey)
     screenshot_helper.start()
 
     try:
