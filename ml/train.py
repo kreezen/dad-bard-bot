@@ -22,7 +22,7 @@ class Train():
         # torch.save(self.model, model_path)
         print("Model saved.")
 
-    def train_model(self, num_epochs):
+    def train_model(self, num_epochs, threshold=0.97):
 
         for epoch in range(num_epochs):
             self.model.train()  # Set the model to training mode
@@ -47,7 +47,7 @@ class Train():
 
             train_loss = running_loss / len(self.train_loader)
             train_accuracy = (correct_predictions / total_samples) * 100.0
-            if train_accuracy >= 97.0:
+            if train_accuracy >= threshold:
                 self.save_model("bard.pth")
                 break
 
@@ -92,10 +92,11 @@ def main():
 
     # Define the number of epochs, ends anyways when the thresholds hits
     num_epochs = 200
+    threshold = 0.98
 
     # Start training
     train = Train(model_cnn, criterion, optimizer, device, train_loader)
-    train.train_model(num_epochs)
+    train.train_model(num_epochs, threshold=threshold)
     train.save_model("trained_models/bard.pth")
 
 
