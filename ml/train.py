@@ -1,5 +1,4 @@
 from datasetloader import GameFrameDataset
-from simplefullconnected import CustomFullyConnected
 from model import SimpleCNN
 import torch.nn as nn
 import torch

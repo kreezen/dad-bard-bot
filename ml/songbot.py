@@ -8,6 +8,7 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 import time
+import keyboard
 
 
 class Box(Enum):
@@ -36,6 +37,7 @@ class ScreenCaptureNN:
         ])
         self.interval = interval
         self.mouse_clikk = Clikk(Box.INTIAL)
+        self.running = False
 
     def capture_screen(self):
         screen = ImageGrab.grab(bbox=self.screen_area)
@@ -53,11 +55,18 @@ class ScreenCaptureNN:
         cv2.imwrite(save_path, screenshot)
         print(f"Screenshot saved to {save_path}")
 
-    def start_loop(self, threshold=0.8):
+    def start_loop(self, threshold=0.8, key=None):
         print("Starting loop...")
+
         while True:
-            self.evaluate_screen(threshold=threshold)
-            time.sleep(self.interval)
+            if key is None:
+                self.running = True
+            else:
+                self.running = keyboard.is_pressed(key)
+
+            if self.running:
+                self.evaluate_screen(threshold=threshold)
+                time.sleep(self.interval)
 
     def evaluate_screen(self, threshold=0.8):
         screen, trans = self.capture_screen()
@@ -138,4 +147,8 @@ if __name__ == "__main__":
 
     # Model prediction threshold, needs to be sure at least 80% to trigger
     threshold = 0.8
-    screen_capture_nn.start_loop(threshold)
+
+    # Keybind to hold to run the loop for example "alt", for better performance
+    keybind_to_hold = None
+
+    screen_capture_nn.start_loop(threshold, keybind_to_hold)
